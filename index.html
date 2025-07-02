@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zion Voices – Voiceover Portfolio</title>
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-light: #946846;
-      --bg-dark: #6E0D25;
-      --card-light: #E3C16F;
-      --card-dark: #1f1f1f;
-      --text-light: #392007;
-      --text-dark:  #E3C16F;
-      --accent: #774E24;
-      --radius: 20px;
-      --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      --bg-light: #f9f4ef;
+      --bg-dark: #1a1a1a;
+      --card-light: #fff7ec;
+      --card-dark: #262626;
+      --text-light: #37280d;
+      --text-dark: #f4e7d4;
+      --accent: #c97435;
+      --radius: 16px;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --transition: 0.3s ease;
     }
 
     * {
@@ -26,15 +27,14 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Inter', sans-serif;
       background-color: var(--bg-light);
       color: var(--text-light);
-      line-height: 1.6;
       padding: 40px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: var(--transition);
     }
 
     body.dark {
@@ -46,13 +46,13 @@
       background-color: var(--card-light);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
+      max-width: 960px;
       width: 100%;
-      max-width: 900px;
-      padding: 30px;
+      padding: 32px;
       margin: 20px 0;
-      transition: transform 0.3s ease, background-color 0.3s ease;
+      transition: var(--transition);
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
 
     body.dark .card {
@@ -67,26 +67,29 @@
     .title-card img {
       display: block;
       margin: 0 auto 20px;
-      max-width: 120px;
+      width: 120px;
       border-radius: 50%;
     }
 
     .title-card h1 {
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       text-align: center;
+      font-weight: 700;
     }
 
     .title-card p {
-      font-style: italic;
       text-align: center;
-      color: #777;
+      font-style: italic;
+      margin-top: 10px;
+      color: var(--accent);
     }
 
     .section-title {
       font-size: 1.5rem;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #641111;
-      padding-bottom: 5px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+      font-weight: 600;
     }
 
     .demo-grid {
@@ -96,82 +99,82 @@
     }
 
     .demo-card {
-      background: #6d1d1d;
-      padding: 20px;
-      border-radius: 16px;
+      background: var(--card-light);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 16px;
       box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: var(--transition);
     }
 
     .demo-card h3 {
-      font-size: 1.1rem;
       margin-bottom: 10px;
+      font-size: 1.1rem;
     }
 
-    audio {
+    .demo-card iframe {
+      border: none;
+      border-radius: 10px;
       width: 100%;
+      height: 80px;
     }
 
-    .social-icons a{
-      display: inline-flex;
+    .social-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
       justify-content: center;
-      align-items: center;
-      font-size: 3rem;
-      padding: 1rem;
-      background: transparent;
-      border: 2px solid var(--main-color);
-      border-radius: 50%;
-      color: var(--main-color);
-      margin: 3rem 0.5rem;
-      transition: ease-in-out;
+      margin-top: 20px;
+    }
 
-}
-    .social-icons a:hover{
-      color: var(--text-color);
-      background-color: var(--main-color);
-      transform: scale(1.2) translateY(-5px);
-      box-shadow: 0 0 25px var(--main-color);
-}
-    .toggle-btn {
+    .social-icons a {
+      font-size: 2rem;
+      color: var(--accent);
+      background-color: transparent;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-icons a:hover {
+      background-color: var(--accent);
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    .theme-toggle {
       position: fixed;
       top: 20px;
       right: 20px;
-      background-color: var(--accent);
-      color: white;
+      background: none;
       border: none;
-      padding: 10px 16px;
-      border-radius: 10px;
+      font-size: 1.5rem;
       cursor: pointer;
+      color: var(--accent);
       z-index: 1000;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.85rem;
+      color: #888;
     }
   </style>
 </head>
 <body>
-  <<!-- Theme Toggle Button -->
-<button id="theme-toggle" aria-label="Toggle Theme" style="background: none; border: none; cursor: pointer;">
-  <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="5"/>
-    <line x1="12" y1="1" x2="12" y2="3"/>
-    <line x1="12" y1="21" x2="12" y2="23"/>
-    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-    <line x1="1" y1="12" x2="3" y2="12"/>
-    <line x1="21" y1="12" x2="23" y2="12"/>
-    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-  </svg>
-</button>
-
-</button>
-
-<!-- Optional hidden menu -->
-<nav id="nav-menu" style="display: none; margin-top: 10px;">
-  <ul>
-    <li><a href="#about">About</a></li>
-    <li><a href="#demos">Demos</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+    <i class='bx bx-sun'></i>
+  </button>
 
   <div class="card title-card">
     <img src="./images/logo.jpg" alt="Zion Voices Logo">
@@ -181,9 +184,7 @@
 
   <div class="card">
     <h2 class="section-title">About</h2>
-    <p>
-      At Zion Voices, we bring stories, ads, and ideas to life through voice. Whether it's narration, characters, or commercials, our voice speaks beyond the script — it speaks to the soul.
-    </p>
+    <p>At Zion Voices, we bring stories, ads, and ideas to life through voice. Whether it's narration, characters, or commercials, our voice speaks beyond the script — it speaks to the soul.</p>
     <p style="margin-top: 10px;">Voice talent in development — fresh, clear, and versatile.</p>
   </div>
 
@@ -191,131 +192,56 @@
     <h2 class="section-title">Voice Demos</h2>
     <div class="demo-grid">
       <div class="demo-card">
-  <h3>Demo 1</h3>
-  <iframe 
-    width="100%" 
-    height="120" 
-    scrolling="no" 
-    frameborder="no" 
-    allow="autoplay" 
-    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charity-silah/vid-20250630-wa0011-1-1&color=%23ff5500&inverse=false&auto_play=false&show_user=true">
-  </iframe>
-</div>
-
-<div class="demo-card">
-  <h3>Demo 2</h3>
-  <iframe 
-    width="100%" 
-    height="120" 
-    scrolling="no" 
-    frameborder="no" 
-    allow="autoplay" 
-    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charity-silah/vid-20250630-wa0008-1-2&color=%23ff5500&inverse=false&auto_play=false&show_user=true">
-  </iframe>
-</div>
-
-<div class="demo-card">
-  <h3>Demo 3</h3>
-  <iframe 
-    width="100%" 
-    height="120" 
-    scrolling="no" 
-    frameborder="no" 
-    allow="autoplay" 
-    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charity-silah/vid-20250630-wa0011-3&color=%23ff5500&inverse=false&auto_play=false&show_user=true">
-  </iframe>
-</div>
-
-<div class="demo-card">
-  <h3>Demo 4</h3>
-  <iframe 
-    width="100%" 
-    height="120" 
-    scrolling="no" 
-    frameborder="no" 
-    allow="autoplay" 
-    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charity-silah/vid-20250630-wa0008-4&color=%23ff5500&inverse=false&auto_play=false&show_user=true">
-  </iframe>
-</div>
-
+        <h3>Demo 1</h3>
+        <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charity-silah/vid-20250630-wa0011-1-1&color=%239c5c28&auto_play=false&show_user=false"></iframe>
+      </div>
+      <div class="demo-card">
+        <h3>Demo 2</h3>
+        <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charity-silah/vid-20250630-wa0008-1-2&color=%239c5c28&auto_play=false&show_user=false"></iframe>
+      </div>
+      <div class="demo-card">
+        <h3>Demo 3</h3>
+        <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charity-silah/vid-20250630-wa0011-3&color=%239c5c28&auto_play=false&show_user=false"></iframe>
+      </div>
+      <div class="demo-card">
+        <h3>Demo 4</h3>
+        <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charity-silah/vid-20250630-wa0008-4&color=%239c5c28&auto_play=false&show_user=false"></iframe>
+      </div>
+    </div>
   </div>
 
   <div class="card">
     <h2 class="section-title">Contact</h2>
     <p>Let’s connect and bring your ideas to life:</p>
-   <div class="social-icons">
-        <a href="tel:0769247477">
-          <i class="bx bxl-whatsapp"></i>
-        </a>
-
-        <a href="https://facebook.com/Thee_Zion_Voices">
-          <i class="bx bxl-facebook"></i>
-        </a>
-
-        <a href="TheeZionvoices@gmail.com">
-          <i class="bx bxl-gmail"></i>
-        </a>
-
-        <a href="https://www.tiktok.com/Thee_Zion_Voices">
-          <i class="bx bxl-tiktok"></i>
-        </a>
-
-        <a href="https://www.instagram.com/Thee_Zion_Voices">
-          <i class="bx bxl-instagram-alt"></i>
-        </a>
-
-        <a href="https://x.com/Thee_Zion_Voices">
-          <i class="bx bxl-twitter"></i>
-        </a>
+    <div class="social-icons">
+      <a href="tel:0769247477"><i class='bx bxl-whatsapp'></i></a>
+      <a href="https://facebook.com/Thee_Zion_Voices"><i class='bx bxl-facebook'></i></a>
+      <a href="mailto:TheeZionvoices@gmail.com"><i class='bx bxl-gmail'></i></a>
+      <a href="https://www.tiktok.com/Thee_Zion_Voices"><i class='bx bxl-tiktok'></i></a>
+      <a href="https://www.instagram.com/Thee_Zion_Voices"><i class='bx bxl-instagram-alt'></i></a>
+      <a href="https://x.com/Thee_Zion_Voices"><i class='bx bxl-twitter'></i></a>
+    </div>
   </div>
 
-  <footer style="margin-top: 40px; text-align: center; color: #37280d; font-size: 0.9rem;">
+  <footer>
     &copy; 2025 Zion Voices. All rights reserved.
   </footer>
 
   <script>
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     });
+    document.querySelectorAll('.card').forEach(card => observer.observe(card));
 
-    document.querySelectorAll(".card").forEach(card => {
-      observer.observe(card);
+    const toggle = document.getElementById('theme-toggle');
+    const icon = toggle.querySelector('i');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      icon.classList.toggle('bx-sun');
+      icon.classList.toggle('bx-moon');
     });
-
-   
-    // Theme toggle functionality
-  const toggle = document.getElementById('theme-toggle');
-  const icon = document.getElementById('theme-icon');
-  let darkMode = false;
-
-  toggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-    darkMode = !darkMode;
-
-    // Replace the icon SVG
-    icon.innerHTML = darkMode
-      ? `<path d="M21 12.79A9 9 0 0111.21 3a7 7 0 100 14 9 9 0 009.79-4.21z"/>` // moon
-      : `
-        <circle cx="12" cy="12" r="5"/>
-        <line x1="12" y1="1" x2="12" y2="3"/>
-        <line x1="12" y1="21" x2="12" y2="23"/>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-        <line x1="1" y1="12" x2="3" y2="12"/>
-        <line x1="21" y1="12" x2="23" y2="12"/>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-      `;
-  });
-
-
-
   </script>
 </body>
 </html>
-
-
