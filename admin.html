@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin - Zion Voices</title>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+</head>
+<body>
+  <!-- Upload Form -->
+  <form id="uploadForm">
+    <input type="text" id="videoTitle" placeholder="Video title" required />
+    <input type="url" id="videoURL" placeholder="Vimeo embed link" required />
+    <button type="submit">Upload</button>
+  </form>
+
+  <script>
+    // ✅ Paste your Firebase config here
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "your-project-id.firebaseapp.com",
+      projectId: "your-project-id",
+      storageBucket: "your-project-id.appspot.com",
+      messagingSenderId: "your-messaging-sender-id",
+      appId: "your-app-id"
+    };
+
+    // ✅ Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // ✅ Form submission
+    const uploadForm = document.getElementById('uploadForm');
+    uploadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById('videoTitle').value;
+      const url = document.getElementById('videoURL').value;
+
+      try {
+        await db.collection('demos').add({
+          title: title,
+          url: url,
+          timestamp: new Date()
+        });
+        alert('Uploaded!');
+        uploadForm.reset();
+      } catch (err) {
+        console.error("Upload failed", err);
+        alert('Error uploading. Check console.');
+      }
+    });
+  </script>
+</body>
+</html>

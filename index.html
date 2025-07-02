@@ -101,15 +101,7 @@
       icon.classList.toggle('bx-moon');
     });
 
-    import { serverTimestamp } from "firebase/firestore";
-
-// When adding a document
-await addDoc(collection(db, "demos"), {
-  title: "Demo 1",
-  videoUrl: "https://vimeo.com/your-link",
-  timestamp: serverTimestamp(), // 🕒 this sets it automatically
-});
-
+    
   </script>
 </body>
 </html>
