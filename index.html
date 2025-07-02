@@ -8,17 +8,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-light: #FDF6E3;
-      --bg-dark: #0C0C0C;
-      --card-light: #FFF9E3;
-      --card-dark: 	#1E1A17;
-      --text-light: #2B2B2B;
-      --text-dark: #FDF8F0;
-      --accent: #9C5C28;
+      --bg-light: #fdf6e3;
+      --bg-dark: #0c0c0c;
+      --card-light: #fff9e3;
+      --card-dark: #1e1a17;
+      --text-light: #2b2b2b;
+      --text-dark: #fdf8f0;
+      --accent: #d4af37;
       --radius: 16px;
       --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
       --transition: 0.3s ease;
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -41,6 +42,39 @@
       color: var(--text-dark);
     }
 
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 45px;
+      background-color: var(--card-light);
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      z-index: 999;
+    }
+
+    body.dark nav {
+      background-color: var(--card-dark);
+    }
+
+    nav a {
+      margin: 0 20px;
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    body.dark nav a {
+      color: var(--text-dark);
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
     .card {
       background-color: var(--card-light);
       border-radius: var(--radius);
@@ -48,7 +82,7 @@
       max-width: 960px;
       width: 100%;
       padding: 32px;
-      margin: 20px 0;
+      margin: 100px 0 20px;
       transition: var(--transition);
       opacity: 0;
       transform: translateY(20px);
@@ -166,23 +200,30 @@
   </style>
 </head>
 <body>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#demos">Demos</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
   <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
     <i class='bx bx-sun'></i>
   </button>
 
-  <div class="card title-card">
+  <div id="home" class="card title-card">
     <img src="./images/logo.jpg" alt="Zion Voices Logo">
     <h1>Zion Voices</h1>
     <p>"As Far as You Can See, We Can Speak"</p>
   </div>
 
-  <div class="card">
+  <div id="about" class="card">
     <h2 class="section-title">About</h2>
     <p>At Zion Voices, we bring stories, ads, and ideas to life through voice. Whether it's narration, characters, or commercials, our voice speaks beyond the script — it speaks to the soul.</p>
     <p style="margin-top: 10px;">Voice talent in development — fresh, clear, and versatile.</p>
   </div>
 
-  <div class="card">
+  <div id="demos" class="card">
     <h2 class="section-title">Voice Demos</h2>
     <div class="demo-grid">
       <div class="demo-card">
@@ -200,7 +241,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div id="contact" class="card">
     <h2 class="section-title">Contact</h2>
     <p>Let’s connect and bring your ideas to life:</p>
     <div class="social-icons">
