@@ -7,7 +7,23 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="./index.js">
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "...",
+    authDomain: "...",
+    projectId: "...",
+    storageBucket: "...",
+    messagingSenderId: "...",
+    appId: "..."
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const auth = firebase.auth();
+</script>
 
 </head>
 <body>
@@ -84,6 +100,16 @@
       icon.classList.toggle('bx-sun');
       icon.classList.toggle('bx-moon');
     });
+
+    import { serverTimestamp } from "firebase/firestore";
+
+// When adding a document
+await addDoc(collection(db, "demos"), {
+  title: "Demo 1",
+  videoUrl: "https://vimeo.com/your-link",
+  timestamp: serverTimestamp(), // 🕒 this sets it automatically
+});
+
   </script>
 </body>
 </html>
