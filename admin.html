@@ -8,11 +8,13 @@
 </head>
 <body>
   <!-- Upload Form -->
-  <form id="uploadForm">
-    <input type="text" id="videoTitle" placeholder="Video title" required />
-    <input type="url" id="videoURL" placeholder="Vimeo embed link" required />
-    <button type="submit">Upload</button>
-  </form>
+  <h2>Add New Voice Demo</h2>
+<form id="uploadForm">
+  <input type="text" id="videoTitle" placeholder="Video title" required />
+  <input type="url" id="videoURL" placeholder="Vimeo embed link" required />
+  <button type="submit">Upload</button>
+</form>
+
 
   <script>
     // ✅ Paste your Firebase config here
@@ -28,6 +30,8 @@
     // ✅ Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+
+    
 
     // ✅ Form submission
     const uploadForm = document.getElementById('uploadForm');
