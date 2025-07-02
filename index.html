@@ -19,7 +19,6 @@
       --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
       --transition: 0.3s ease;
     }
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -27,7 +26,7 @@
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Inter', sans-serif;
       background-color: var(--bg-light);
       color: var(--text-light);
       padding: 40px 20px;
@@ -95,32 +94,27 @@
     .demo-grid {
       display: grid;
       gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
 
     .demo-card {
+      position: relative;
+      padding-top: 56.25%;
       background: var(--card-light);
       border: 2px solid var(--accent);
       border-radius: 12px;
-      padding: 16px;
+      overflow: hidden;
       box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
       transition: var(--transition);
     }
 
-    .demo-card h3 {
-      margin-bottom: 10px;
-      font-size: 1.1rem;
-    }
-
     .demo-card iframe {
-      border: none;
-      border-radius: 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 80px;
+      height: 100%;
+      border: none;
     }
 
     .social-icons {
@@ -192,20 +186,16 @@
     <h2 class="section-title">Voice Demos</h2>
     <div class="demo-grid">
       <div class="demo-card">
-        <h3>Demo 1</h3>
-        <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charity-silah/vid-20250630-wa0011-1-1&color=%239c5c28&auto_play=false&show_user=false"></iframe>
+        <iframe src="https://player.vimeo.com/video/1098277001" title="Demo 1" allow="autoplay; fullscreen; picture-in-picture"></iframe>
       </div>
       <div class="demo-card">
-        <h3>Demo 2</h3>
-        <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charity-silah/vid-20250630-wa0008-1-2&color=%239c5c28&auto_play=false&show_user=false"></iframe>
+        <iframe src="https://player.vimeo.com/video/1098276815" title="Demo 2" allow="autoplay; fullscreen; picture-in-picture"></iframe>
       </div>
       <div class="demo-card">
-        <h3>Demo 3</h3>
-        <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charity-silah/vid-20250630-wa0011-3&color=%239c5c28&auto_play=false&show_user=false"></iframe>
+        <iframe src="https://player.vimeo.com/video/1098276494" title="Demo 3" allow="autoplay; fullscreen; picture-in-picture"></iframe>
       </div>
       <div class="demo-card">
-        <h3>Demo 4</h3>
-        <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/charity-silah/whatsapp-video-2025-07-01-at&color=%239c5c28&auto_play=false&show_user=false"></iframe>
+        <iframe src="https://player.vimeo.com/video/1098276181" title="Demo 4" allow="autoplay; fullscreen; picture-in-picture"></iframe>
       </div>
     </div>
   </div>
