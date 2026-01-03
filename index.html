@@ -1,107 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zion Voices – Voiceover Portfolio</title>
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css">
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script>
-  const firebaseConfig = {
-    apiKey: "...",
-    authDomain: "...",
-    projectId: "...",
-    storageBucket: "...",
-    messagingSenderId: "...",
-    appId: "..."
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-  const auth = firebase.auth();
-</script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice of Zion | Premium Artistry</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#demos">Demos</a>
-    <a href="#contact">Contact</a>
-  </nav>
 
-  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
-    <i class='bx bx-sun'></i>
-  </button>
+    <div class="bg-glow"></div>
 
-  <div id="home" class="card title-card">
-    <img src="./images/logo.jpg" alt="Zion Voices Logo">
-    <h1>Zion Voices</h1>
-    <p>"As Far as You Can See, We Can Speak"</p>
-  </div>
+    <div class="container">
+        <header class="hero">
+            <div class="badge">Available for Global Bookings</div>
+            <h1>Voice <span class="accent">of</span> Zion</h1>
+            <p class="tagline">Resonant. Professional. Immersive. Captivating audiences through premium voice performance.</p>
+            <div class="hero-btns">
+                <a href="#portfolio" class="btn">Explore Work</a>
+                <a href="#contact" class="btn secondary">Get a Quote</a>
+            </div>
+        </header>
 
-  <div id="about" class="card">
-    <h2 class="section-title">About</h2>
-    <p>At Zion Voices, we bring stories, ads, and ideas to life through voice. Whether it's narration, characters, or commercials, our voice speaks beyond the script — it speaks to the soul.</p>
-    <p style="margin-top: 10px;">Voice talent in development — fresh, clear, and versatile.</p>
-  </div>
+        <section id="admin-panel" class="glass-card">
+            <h2 class="section-title">Portfolio Management</h2>
+            <form id="uploadForm">
+                <input type="text" id="title" placeholder="Project Name" required>
+                <select id="type">
+                    <option value="audio">SoundCloud URL</option>
+                    <option value="video">YouTube/Vimeo Embed URL</option>
+                </select>
+                <input type="url" id="urlInput" placeholder="Paste link here..." required>
+                <button type="submit" id="upBtn" class="btn">Add to Gallery</button>
+            </form>
+            <button onclick="logout()" class="logout-link">Exit Secure Session</button>
+        </section>
 
-  <div id="demos" class="card">
-    <h2 class="section-title">Voice Demos</h2>
-    <div class="demo-grid">
-      <div class="demo-card">
-        <iframe src="https://player.vimeo.com/video/1098277001" title="Demo 1" allow="autoplay; fullscreen; picture-in-picture"></iframe>
-      </div>
-      <div class="demo-card">
-        <iframe src="https://player.vimeo.com/video/1098276815" title="Demo 2" allow="autoplay; fullscreen; picture-in-picture"></iframe>
-      </div>
-      <div class="demo-card">
-        <iframe src="https://player.vimeo.com/video/1098276494" title="Demo 3" allow="autoplay; fullscreen; picture-in-picture"></iframe>
-      </div>
-      <div class="demo-card">
-        <iframe src="https://player.vimeo.com/video/1098276181" title="Demo 4" allow="autoplay; fullscreen; picture-in-picture"></iframe>
-      </div>
+        <main id="portfolio">
+            <div class="section-header">
+                <span class="step-num">01</span>
+                <h2 class="section-title">Vocal Reels</h2>
+            </div>
+            <div id="audio-list" class="fade-in">
+                </div>
+
+            <div class="section-header" style="margin-top: 80px;">
+                <span class="step-num">02</span>
+                <h2 class="section-title">Visual Productions</h2>
+            </div>
+            <div id="video-list" class="video-grid">
+                </div>
+        </main>
+
+        <section id="expertise" class="expertise-section" style="margin-top: 80px;">
+            <div class="section-header">
+                <span class="step-num">03</span>
+                <h2 class="section-title">The Craft</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card glass-card">
+                    <span class="skill-name">Commercial VO</span>
+                    <div class="progress-bar"><div class="progress" style="width: 95%"></div></div>
+                </div>
+                <div class="skill-card glass-card">
+                    <span class="skill-name">Narrative / E-Learning</span>
+                    <div class="progress-bar"><div class="progress" style="width: 90%"></div></div>
+                </div>
+                <div class="skill-card glass-card">
+                    <span class="skill-name">Character Acting</span>
+                    <div class="progress-bar"><div class="progress" style="width: 85%"></div></div>
+                </div>
+                <div class="skill-card glass-card">
+                    <span class="skill-name">Post-Production</span>
+                    <div class="progress-bar"><div class="progress" style="width: 80%"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" style="margin-top: 80px;">
+            <div class="section-header">
+                <span class="step-num">04</span>
+                <h2 class="section-title">Client Praise</h2>
+            </div>
+            <div class="glass-card testimonial-item">
+                <p>"Zion has a voice that commands attention. A true professional who delivers quality every single time."</p>
+                <span class="client-name">— Alex Rivers, Creative Lead</span>
+            </div>
+        </section>
+
+        <section id="contact" class="glass-card" style="margin-top: 80px;">
+            <div class="section-header">
+                <h2 class="section-title">Direct Inquiry</h2>
+                <p style="color:#888">Discuss your next production or request a custom demo.</p>
+            </div>
+            <form action="https://formspree.io/f/YOUR_ID" method="POST">
+                <div class="form-row">
+                    <input type="text" name="name" placeholder="Full Name" required>
+                    <input type="email" name="email" placeholder="Email Address" required>
+                </div>
+                <textarea name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                <button type="submit" class="btn">Send Transmission</button>
+            </form>
+        </section>
+
+        <footer>
+            <div id="admin-trigger" onclick="showAdmin()">Authorized Access Only</div>
+            <p style="text-align: center; color: #444; font-size: 12px; margin-top: 20px;">&copy; 2026 VOICE OF ZION</p>
+        </footer>
     </div>
-  </div>
 
-  <div id="contact" class="card">
-    <h2 class="section-title">Contact</h2>
-    <p>Let’s connect and bring your ideas to life:</p>
-   <div class="social-icons">
-      <a href="https://wa.me/254769247477" target="_blank" title="WhatsApp"><i class='bx bxl-whatsapp'></i></a>
-      <a href="https://facebook.com/Thee_Zion_Voices" target="_blank" title="Facebook"><i class='bx bxl-facebook'></i></a>
-      <a href="mailto:TheeZionvoices@gmail.com" title="Email"><i class='bx bxl-gmail'></i></a>
-      <a href="https://www.tiktok.com/@Thee_Zion_Voices" target="_blank" title="TikTok"><i class='bx bxl-tiktok'></i></a>
-      <a href="https://www.instagram.com/Thee_Zion_Voices" target="_blank" title="Instagram"><i class='bx bxl-instagram-alt'></i></a>
-      <a href="https://x.com/Thee_Zion_Voices" target="_blank" title="X (Twitter)"><i class='bx bxl-twitter'></i></a>
-    </div>
-  </div>
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBI3-tqfVHibgj-tVd3ViMROA7re_CC6n8",
+            authDomain: "zionvoices-a52f6.firebaseapp.com",
+            projectId: "zionvoices-a52f6",
+            storageBucket: "zionvoices-a52f6.firebasestorage.app",
+            messagingSenderId: "575312188198",
+            appId: "1:575312188198:web:a19ba978c40b86d20ee7e7",
+            measurementId: "G-6J8QKNER08"
+        };
 
-  <footer>
-    &copy; 2025 Zion Voices. All rights reserved.
-  </footer>
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        let isAdmin = false;
 
-  <script>
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    });
-    document.querySelectorAll('.card').forEach(card => observer.observe(card));
+        function showAdmin() {
+            if(prompt("System Key:") === "zion123") {
+                isAdmin = true;
+                document.getElementById('admin-panel').style.display = 'block';
+                document.getElementById('admin-trigger').style.display = 'none';
+                refreshDisplay();
+            }
+        }
 
-    const toggle = document.getElementById('theme-toggle');
-    const icon = toggle.querySelector('i');
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      icon.classList.toggle('bx-sun');
-      icon.classList.toggle('bx-moon');
-    });
+        function logout() { location.reload(); }
 
-    
-  </script>
+        async function deleteItem(id) {
+            if(confirm("Permanently remove this from portfolio?")) {
+                await db.collection('demos').doc(id).delete();
+            }
+        }
+
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('upBtn');
+            btn.disabled = true; 
+            try {
+                await db.collection('demos').add({
+                    title: document.getElementById('title').value,
+                    type: document.getElementById('type').value,
+                    url: document.getElementById('urlInput').value,
+                    createdAt: Date.now()
+                });
+                document.getElementById('uploadForm').reset();
+            } catch(err) { alert(err.message); }
+            btn.disabled = false;
+        });
+
+        function refreshDisplay() {
+            db.collection('demos').orderBy('createdAt', 'desc').onSnapshot(snap => {
+                const audioList = document.getElementById('audio-list');
+                const videoList = document.getElementById('video-list');
+                let aHTML = ""; let vHTML = "";
+
+                snap.forEach(doc => {
+                    const data = doc.data();
+                    const id = doc.id;
+                    const delBtn = isAdmin ? `<button class="delete-btn" onclick="deleteItem('${id}')">×</button>` : '';
+
+                    if(data.type === 'audio') {
+                        aHTML += `
+                            <div class="glass-card" style="margin-bottom: 20px; padding: 25px;">
+                                ${delBtn}
+                                <span class="item-meta">${data.title}</span>
+                                <iframe width="100%" height="120" scrolling="no" frameborder="no" 
+                                    src="https://w.soundcloud.com/player/?url=${encodeURIComponent(data.url)}&color=%23d4af37&inverse=true">
+                                </iframe>
+                            </div>`;
+                    } else {
+                        vHTML += `
+                            <div class="glass-card" style="padding: 15px;">
+                                ${delBtn}
+                                <iframe src="${data.url}" frameborder="0" allowfullscreen height="220"></iframe>
+                                <span class="item-meta" style="text-align:center; display:block;">${data.title}</span>
+                            </div>`;
+                    }
+                });
+                audioList.innerHTML = aHTML || "<p style='opacity:0.3'>Awaiting audio sync...</p>";
+                videoList.innerHTML = vHTML || "<p style='opacity:0.3'>Awaiting video sync...</p>";
+            });
+        }
+
+        refreshDisplay();
+    </script>
 </body>
 </html>
