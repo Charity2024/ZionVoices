@@ -5,266 +5,347 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voice of Zion | Premium Artistry</title>
     
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    :root {
+        --gold: #d4af37;
+        --gold-glow: rgba(212, 175, 55, 0.4);
+        --dark: #050505;
+        --glass-bg: rgba(255, 255, 255, 0.03);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        --success: #2ecc71;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+        background-color: var(--dark);
+        color: #efefef;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        margin: 0;
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    /* --- BACKGROUND --- */
+    .bg-wrapper {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -2; background: #000; overflow: hidden;
+    }
+    .orb {
+        position: absolute; width: 60vw; height: 60vw; border-radius: 50%;
+        filter: blur(100px); opacity: 0.12; pointer-events: none;
+    }
+    .orb-1 { background: var(--gold); top: -10%; left: -10%; }
+    .orb-2 { background: #333; bottom: -10%; right: -10%; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    /* --- HERO --- */
+    .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 10px;
+    }
+    .hero-bg-text {
+        position: absolute; font-size: 28vw; font-weight: 800; color: transparent;
+        -webkit-text-stroke: 1px rgba(255,255,255,0.02); z-index: -1;
+        letter-spacing: -1vw; user-select: none;
+    }
+    .hero h1 { 
+        font-size: clamp(2.8rem, 10vw, 9rem); 
+        font-weight: 800; text-transform: uppercase; margin: 0; line-height: 0.85; 
+        letter-spacing: -2px;
+        background: linear-gradient(to bottom, #fff, #777);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-wave { display: flex; align-items: flex-end; gap: 4px; height: 40px; margin-bottom: 20px; }
+    .wave-bar { width: 3px; background: var(--gold); border-radius: 2px; animation: wave-pulse 1.5s ease-in-out infinite; }
+    @keyframes wave-pulse { 0%, 100% { height: 10px; opacity: 0.2; } 50% { height: 40px; opacity: 1; } }
+
+    /* --- GRID --- */
+    .grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+        gap: 25px; 
+    }
+
+    /* --- GLASS CARDS --- */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 30px;
+        transition: var(--transition);
+        position: relative;
+    }
+    .glass-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+
+    /* --- FOOTER & CONTACT --- */
+    .site-footer { padding: 80px 0 40px; margin-top: 100px; border-top: 1px solid var(--glass-border); }
+    .contact-grid { 
+        display: grid; 
+        grid-template-columns: 1fr 1.2fr; 
+        gap: 60px; 
+    }
+    @media (max-width: 900px) {
+        .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .input-field {
+        width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+        border-radius: 12px; padding: 18px; color: white; font-family: inherit;
+        outline: none; margin-bottom: 15px; transition: 0.3s;
+    }
+    .input-field:focus { border-color: var(--gold); }
+
+    .send-btn {
+        background: var(--gold); color: black; width: 100%; padding: 18px; border: none;
+        border-radius: 12px; font-weight: 800; cursor: pointer; display: flex;
+        justify-content: space-between; align-items: center; transition: 0.4s;
+    }
+
+    .tag { font-size: 9px; border: 1px solid var(--gold); color: var(--gold); padding: 3px 10px; border-radius: 50px; text-transform: uppercase; font-weight: 800; margin-right: 8px; }
+    
+    /* --- ADMIN PANEL --- */
+    #admin-panel { 
+        display: none; background: rgba(10,10,10,0.99); backdrop-filter: blur(50px);
+        border: 2px solid var(--gold); padding: 40px; border-radius: 30px; 
+        margin: 40px 0; box-shadow: 0 0 80px rgba(0,0,0,0.8);
+        position: sticky; top: 20px; z-index: 1000;
+    }
+    
+    #admin-indicator {
+        position: fixed; top: 20px; right: 20px; background: var(--gold);
+        color: black; padding: 5px 12px; border-radius: 5px; font-weight: 800;
+        font-size: 10px; z-index: 1001; display: none; letter-spacing: 1px;
+    }
+</style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
+    <div id="admin-indicator">STUDIO SESSION ACTIVE</div>
+
+    <div class="bg-wrapper">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
 
     <div class="container">
         <header class="hero">
-            <div class="badge">Available for Global Bookings</div>
-            <h1>Voice <span class="accent">of</span> Zion</h1>
-            <p class="tagline">Resonant. Professional. Immersive. Captivating audiences through premium voice performance.</p>
-            <div class="hero-btns">
-                <a href="#portfolio" class="btn">Explore Work</a>
-                <a href="#contact" class="btn secondary">Get a Quote</a>
+            <div class="hero-bg-text" id="heroBg">ZION</div>
+            <div class="hero-wave">
+                <div class="wave-bar" style="animation-delay: 0.1s"></div>
+                <div class="wave-bar" style="animation-delay: 0.3s"></div>
+                <div class="wave-bar" style="animation-delay: 0.2s"></div>
+                <div class="wave-bar" style="animation-delay: 0.4s"></div>
+                <div class="wave-bar" style="animation-delay: 0.5s"></div>
             </div>
+            <h1>Voice <span style="font-family:'Playfair Display', serif; color:var(--gold); font-style:italic; -webkit-text-fill-color:var(--gold);">of</span> Zion</h1>
+            <p style="letter-spacing: 4px; color: #888; text-transform: uppercase; font-size: clamp(10px, 2vw, 12px); font-weight: 800; margin-top: 15px;">Capturing the frequency of modern narrative</p>
         </header>
 
-        <section id="admin-panel" class="glass-card" style="display: none;">
-            <h2 class="section-title">Admin Management</h2>
-            <p style="font-size: 0.8rem; color: var(--gold); margin-bottom: 20px;">Note: Preview changes below. Edit HTML to save permanently.</p>
-            <form id="localUploadForm">
-                <input type="text" id="newTitle" placeholder="Project Name" required>
-                <select id="newType">
-                    <option value="audio">Audio File (MP3)</option>
-                    <option value="video">Video (YouTube/Vimeo)</option>
-                </select>
-                <input type="text" id="newTags" placeholder="Tags (e.g. Bold, Warm, 0:30s)">
-                <input type="text" id="newUrl" placeholder="File Path or URL" required>
-                <button type="button" onclick="previewItem()" class="btn">Preview on Site</button>
-            </form>
-            <button onclick="toggleAdmin()" class="logout-link">Close Admin</button>
+        <section id="admin-panel">
+            <h2 style="letter-spacing: 2px; margin: 0 0 25px 0; color:var(--gold)">ARCHIVE MANAGEMENT</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <input type="text" id="newTitle" class="input-field" placeholder="Reel Title" style="margin:0;">
+                <input type="text" id="newTags" class="input-field" placeholder="Tone Tags (e.g. Gritty, Corporate)" style="margin:0;">
+                <input type="text" id="newUrl" class="input-field" placeholder="Audio or Video Link" style="grid-column: span 2; margin:0;">
+                <button id="publishBtn" onclick="handleAddItem()" class="send-btn" style="grid-column: span 2;">
+                    <span>UPDATE SITE</span>
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+            <div style="display:flex; justify-content: space-between; margin-top: 25px; border-top: 1px solid #222; padding-top: 20px;">
+                <button onclick="logoutAdmin()" style="color:#ff4444; background:none; border:none; cursor:pointer; font-weight:800; font-size:10px;">EXIT STUDIO</button>
+                <button onclick="toggleAdminView()" style="color:#555; background:none; border:none; cursor:pointer; font-weight:800; font-size:10px;">MINIMIZE</button>
+            </div>
         </section>
 
-        <main id="portfolio">
-            <div class="section-header">
-                <div class="header-left">
-                    <span class="step-num">01</span>
-                    <h2 class="section-title">Sonic Archive</h2>
-                </div>
-                <div class="header-right studio-lamp">
-                    <span class="lamp-dot"></span> Signal Processed
-                </div>
+        <main>
+            <div style="display: flex; align-items: center; gap: 15px; margin: 60px 0 30px;">
+                <h2 style="text-transform: uppercase; letter-spacing: 3px; font-size: 1rem; margin: 0;">Vocal Archetypes</h2>
+                <div style="flex-grow: 1; height: 1px; background: var(--glass-border);"></div>
             </div>
-            <div id="audio-list" class="audio-grid fade-in"></div>
+            <div id="audio-list" class="grid"></div>
 
-            <div class="section-header" style="margin-top: 100px;">
-                <div class="header-left">
-                    <span class="step-num">02</span>
-                    <h2 class="section-title">Visual Showcase</h2>
-                </div>
+            <div style="display: flex; align-items: center; gap: 15px; margin: 80px 0 30px;">
+                <h2 style="text-transform: uppercase; letter-spacing: 3px; font-size: 1rem; margin: 0;">Visual Performances</h2>
+                <div style="flex-grow: 1; height: 1px; background: var(--glass-border);"></div>
             </div>
-            <div id="video-list" class="video-grid"></div>
+            <div id="video-list" class="grid"></div>
         </main>
 
-        <section id="expertise" style="margin-top: 100px;">
-            <div class="section-header">
-                <span class="step-num">03</span>
-                <h2 class="section-title">The Craft</h2>
-            </div>
-
-            <div class="expertise-container">
-                <div class="skill-module glass-card">
-                    <div class="module-header">
-                        <i class="fas fa-broadcast-tower module-icon"></i>
-                        <div class="module-titles">
-                            <span class="skill-name">Commercial VO</span>
-                            <span class="module-subtitle">Brand Authority & Resonance</span>
-                        </div>
-                    </div>
-                    <div class="frequency-analyzer">
-                        <div class="vocal-range-label">Presence</div>
-                        <div class="progress-bar studio-meter">
-                            <div class="progress" style="width: 95%"></div>
-                            <div class="meter-ticks"><span></span><span></span><span></span><span></span></div>
-                        </div>
-                    </div>
-                    <ul class="skill-details">
-                        <li><i class="fas fa-check"></i> High-End Luxury Branding</li>
-                        <li><i class="fas fa-check"></i> High-Energy Explainer VOs</li>
-                        <li><i class="fas fa-check"></i> Conversational "Guy Next Door"</li>
-                    </ul>
-                </div>
-
-                <div class="skill-module glass-card">
-                    <div class="module-header">
-                        <i class="fas fa-theater-masks module-icon"></i>
-                        <div class="module-titles">
-                            <span class="skill-name">Character Acting</span>
-                            <span class="module-subtitle">Narrative Depth & Texture</span>
-                        </div>
-                    </div>
-                    <div class="frequency-analyzer">
-                        <div class="vocal-range-label">Versatility</div>
-                        <div class="progress-bar studio-meter">
-                            <div class="progress" style="width: 88%"></div>
-                            <div class="meter-ticks"><span></span><span></span><span></span><span></span></div>
-                        </div>
-                    </div>
-                    <ul class="skill-details">
-                        <li><i class="fas fa-check"></i> Cinematic AAA Gaming</li>
-                        <li><i class="fas fa-check"></i> Multi-Dialect Performance</li>
-                        <li><i class="fas fa-check"></i> Long-form Audiobooks</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="glass-card contact-container" style="margin-top: 100px;">
+        <footer class="site-footer">
             <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="section-header">
-                        <h2 class="section-title" style="margin-bottom: 10px;">Direct Transmission</h2>
-                    </div>
-                    <p class="contact-description">Ready to elevate your project? Brief the studio below to initiate collaboration.</p>
-                    <div class="contact-meta">
-                        <div class="meta-item">
-                            <span class="meta-label">Average Response</span>
-                            <span class="meta-value">Under 24 Hours</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Studio Status</span>
-                            <span class="meta-value pulse-text">Online & Ready</span>
-                        </div>
-                    </div>
+                <div>
+                    <h2 style="font-size: clamp(2.5rem, 8vw, 3.5rem); line-height: 0.9; margin: 0; font-weight: 800;">Define your <br><span style="color:var(--gold)">Sonic Identity</span></h2>
+                    <div style="font-family: monospace; font-size: 2rem; margin-top: 30px;" id="local-clock">00:00:00</div>
+                    <p style="color: #666; font-size: 11px; margin-top: 15px; max-width: 300px;">Direct transmissions for commercial, narrative, and cinematic collaboration.</p>
                 </div>
-                <div class="contact-form-wrap">
-                    <form action="https://formspree.io/f/YOUR_ID" method="POST" id="transmissionForm">
-                        <div class="input-group">
-                            <input type="text" name="name" placeholder="IDENTIFICATION (NAME)" required>
-                            <div class="input-line"></div>
-                        </div>
-                        <div class="input-group">
-                            <input type="email" name="email" placeholder="ENVOY ADDRESS (EMAIL)" required>
-                            <div class="input-line"></div>
-                        </div>
-                        <div class="input-group">
-                            <textarea name="message" rows="4" placeholder="PROJECT SPECIFICATIONS..." required></textarea>
-                            <div class="input-line"></div>
-                        </div>
-                        <button type="submit" class="btn transmission-btn">
-                            <span>Send Transmission</span>
-                            <i class="fas fa-satellite-dish" style="margin-left: 10px;"></i>
-                        </button>
+
+                <div>
+                    <form id="contactForm">
+                        <input type="text" class="input-field" placeholder="PARTNER NAME / AGENCY">
+                        <input type="email" class="input-field" placeholder="TRANSMISSION EMAIL">
+                        <textarea class="input-field" rows="4" placeholder="DESCRIBE THE VISION..."></textarea>
+                        <button type="button" class="send-btn"><span>CONTACT US</span><i class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
-        </section>
-
-        <footer class="site-footer">
-            <div class="footer-visualizer" id="footerVisualizer"></div>
-            <div class="footer-content">
-                <div class="footer-grid">
-                    <div class="footer-brand">
-                        <h2 class="footer-logo">ZION</h2>
-                        <div class="studio-status"><span class="status-dot"></span> Studio Status: Ready</div>
-                    </div>
-                    <div class="footer-availability">
-                        <span class="footer-label">Studio Time</span>
-                        <div id="local-clock" class="clock">00:00:00</div>
-                    </div>
-                </div>
-                <div class="massive-text">VOICE OF ZION</div>
-                <div class="footer-bottom">
-                    <span onclick="toggleAdmin()" style="cursor: pointer; opacity: 0.5;">SECURE ACCESS</span>
-                    <span>&copy; 2026 VOICE OF ZION.</span>
-                </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 60px; border-top: 1px solid var(--glass-border); padding-top: 30px; font-size: 10px; color: #444;">
+                <p>VOICE OF ZION © 2026</p>
+                <div onclick="checkLogin()" style="cursor:pointer; letter-spacing: 2px; color:var(--gold)">STUDIO</div>
             </div>
         </footer>
     </div>
 
     <script>
-        const portfolioData = [
-            { title: "Commercial Demo 2026", type: "audio", tags: ["Bold", "0:45s"], url: "audio/demo1.mp3" },
-            { title: "Narrative Showcase", type: "audio", tags: ["Warm", "1:20s"], url: "audio/demo2.mp3" },
-            { title: "Brand Storyboard", type: "video", tags: ["Cinematic"], url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+        // UPDATED PLACEHOLDERS WITH RELEVANT TEXT
+        const placeholders = [
+            { title: "Cinematic Narrative Reel", tags: "Dark, Gritty, Epic", type: "audio", embed: "https://soundcloud.com/creativelabs/narrative-demo" },
+            { title: "Modern Commercial Demo", tags: "Professional, Warm, Smooth", type: "audio", embed: "https://soundcloud.com/creativelabs/commercial-demo" },
+            { title: "Interactive Media / Games", tags: "Character, High-Energy", type: "audio", embed: "https://soundcloud.com/creativelabs/character-demo" },
+            { title: "Featured Brand Campaign", tags: "Commercial Performance", type: "video", embed: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
         ];
 
-        function renderPortfolio() {
+        let portfolio = JSON.parse(localStorage.getItem('zion_v29')) || placeholders;
+        let isAdminActive = false;
+
+        function render() {
             const aList = document.getElementById('audio-list');
             const vList = document.getElementById('video-list');
-            if(!aList || !vList) return;
+            const panel = document.getElementById('admin-panel');
+            const indicator = document.getElementById('admin-indicator');
+            
+            panel.style.display = isAdminActive ? 'block' : 'none';
+            indicator.style.display = isAdminActive ? 'block' : 'none';
             
             aList.innerHTML = ''; vList.innerHTML = '';
-            
-            portfolioData.forEach(item => {
-                const tagHTML = (item.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
-                
+
+            portfolio.forEach((item, index) => {
+                const tags = item.tags.split(',').map(t => `<span class="tag">${t.trim()}</span>`).join('');
+                const delBtn = isAdminActive ? `<button onclick="deleteItem(${index})" style="position:absolute; top:15px; right:15px; background:rgba(255,50,50,0.2); color:#ff5555; border:1px solid #ff5555; padding:5px 10px; border-radius:8px; cursor:pointer; font-weight:800; font-size:9px;">DELETE</button>` : '';
+
                 if(item.type === 'audio') {
                     aList.innerHTML += `
-                        <div class="glass-card audio-wrap">
-                            <div class="audio-info">
-                                <div class="audio-meta">${tagHTML}</div>
-                                <h3 style="margin:0 0 20px 0; font-size: 1.4rem;">${item.title}</h3>
+                        <div class="glass-card" id="card-${index}">
+                            ${delBtn}
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <div><div style="margin-bottom:10px;">${tags}</div><h3 style="margin:0; font-size:1.2rem;">${item.title}</h3></div>
+                                <div style="width:50px; height:50px; background:var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; color:black; cursor:pointer;" onclick="handlePlay(${index})"><i class="fas fa-play" id="icon-${index}"></i></div>
                             </div>
-                            <audio controls style="width: 100%"><source src="${item.url}" type="audio/mpeg"></audio>
+                            <div id="engine-${index}" style="margin-top:20px; height:0; overflow:hidden; transition:0.4s ease;"></div>
                         </div>`;
                 } else {
                     vList.innerHTML += `
-                        <div class="glass-card video-wrap">
-                            <iframe src="${item.url}" frameborder="0" allowfullscreen></iframe>
-                            <div class="video-title-bar">
-                                <h3>${item.title}</h3>
-                                <div class="audio-meta" style="margin:0;">${tagHTML}</div>
+                        <div class="glass-card">
+                            ${delBtn}
+                            <div style="position:relative; padding-top:56.25%; border-radius:12px; overflow:hidden; margin-bottom:15px;">
+                                <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="${item.embed}"></iframe>
                             </div>
+                            <div>${tags}</div><h3 style="margin:10px 0 0 0; font-size:1.2rem;">${item.title}</h3>
                         </div>`;
                 }
             });
         }
 
-        function toggleAdmin() {
-            const panel = document.getElementById('admin-panel');
-            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        // Auth Logic
+        function checkLogin() {
+            if (isAdminActive) { toggleAdminView(); } 
+            else {
+                const pass = prompt("Studio Access Key:");
+                if (pass === "zion2026") { isAdminActive = true; render(); }
+            }
         }
 
-        function previewItem() {
+        function logoutAdmin() { isAdminActive = false; render(); }
+        function toggleAdminView() {
+            const p = document.getElementById('admin-panel');
+            p.style.display = p.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Functional Logic
+        function handleAddItem() {
+            const btn = document.getElementById('publishBtn');
             const title = document.getElementById('newTitle').value;
-            const type = document.getElementById('newType').value;
             const url = document.getElementById('newUrl').value;
-            const tags = document.getElementById('newTags').value.split(',').map(t => t.trim());
-            portfolioData.unshift({title, type, url, tags});
-            renderPortfolio();
+            const tags = document.getElementById('newTags').value;
+
+            if(!title || !url) { alert("Please enter Title and Link."); return; }
+
+            let type = 'audio'; let embed = url;
+            if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                type = 'video';
+                let id = url.includes('v=') ? url.split('v=')[1].split('&')[0] : url.split('/').pop();
+                embed = `https://www.youtube.com/embed/${id}`;
+            }
+            
+            portfolio.unshift({ title, tags, type, embed });
+            localStorage.setItem('zion_v29', JSON.stringify(portfolio));
+
+            btn.style.background = 'var(--success)';
+            btn.innerHTML = '<span>SUCCESSFULLY ARCHIVED</span><i class="fas fa-check"></i>';
+            
+            setTimeout(() => {
+                btn.style.background = 'var(--gold)';
+                btn.innerHTML = '<span>UPDATE PORTFOLIO</span><i class="fas fa-arrow-up"></i>';
+                document.getElementById('newTitle').value = '';
+                document.getElementById('newUrl').value = '';
+                document.getElementById('newTags').value = '';
+                render();
+            }, 1200);
         }
 
-        function initGlobalInteractions() {
-            // Clock Logic
-            setInterval(() => {
-                const clock = document.getElementById('local-clock');
-                if(clock) clock.textContent = new Date().toLocaleTimeString('en-US', { hour12: false });
-            }, 1000);
-
-            // Footer Visualizer Bars
-            const visualizer = document.getElementById('footerVisualizer');
-            if(visualizer) {
-                for (let i = 0; i < 60; i++) {
-                    const bar = document.createElement('div');
-                    bar.className = 'v-bar';
-                    visualizer.appendChild(bar);
-                }
-            }
-
-            // Interactive Footer
-            const footer = document.querySelector('.site-footer');
-            if(footer) {
-                footer.addEventListener('mousemove', (e) => {
-                    const bars = document.querySelectorAll('.v-bar');
-                    bars.forEach(bar => {
-                        const rect = bar.getBoundingClientRect();
-                        const dist = Math.abs(e.clientX - rect.left);
-                        bar.style.height = `${Math.max(10, 80 - dist / 6)}px`;
-                    });
-                });
+        function deleteItem(idx) {
+            if(confirm("Permanently delete this project?")) {
+                portfolio.splice(idx,1);
+                localStorage.setItem('zion_v29', JSON.stringify(portfolio));
+                render();
             }
         }
 
-        window.onload = () => {
-            renderPortfolio();
-            initGlobalInteractions();
-        };
+        function handlePlay(index) {
+            const engine = document.getElementById(`engine-${index}`);
+            const icon = document.getElementById(`icon-${index}`);
+            const card = document.getElementById(`card-${index}`);
+            const isPlaying = card.classList.contains('is-playing');
+
+            document.querySelectorAll(".glass-card").forEach(c => c.classList.remove('is-playing'));
+            document.querySelectorAll("[id^='engine-']").forEach(e => { e.style.height = '0px'; e.innerHTML = ''; });
+            document.querySelectorAll("[id^='icon-']").forEach(i => i.className = 'fas fa-play');
+
+            if(!isPlaying) {
+                card.classList.add('is-playing');
+                icon.className = 'fas fa-pause';
+                engine.style.height = '120px';
+                engine.innerHTML = `<iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=${encodeURIComponent(portfolio[index].embed)}&color=%23d4af37&auto_play=true"></iframe>`;
+            }
+        }
+
+        // Parallax Effect
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 20;
+            const y = (e.clientY / window.innerHeight) * 20;
+            document.querySelectorAll('.orb').forEach((orb, i) => {
+                orb.style.transform = `translate(${x * (i+1)}px, ${y * (i+1)}px)`;
+            });
+            const h = document.getElementById('heroBg');
+            h.style.transform = `translate(${(window.innerWidth/2 - e.pageX)/40}px, ${(window.innerHeight/2 - e.pageY)/40}px)`;
+        });
+
+        setInterval(() => { document.getElementById('local-clock').textContent = new Date().toLocaleTimeString('en-US', { hour12: false }); }, 1000);
+        window.onload = render;
     </script>
 </body>
 </html>
