@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Voice of Zion | Premium Artistry</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
@@ -10,23 +10,20 @@
 <style>
     :root {
         --gold: #d4af37;
-        --gold-glow: rgba(212, 175, 55, 0.4);
         --dark: #050505;
-        --glass-bg: rgba(255, 255, 255, 0.03);
         --glass-border: rgba(255, 255, 255, 0.08);
-        --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        --glass-inner: rgba(255, 255, 255, 0.03);
+        --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         --success: #2ecc71;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-        background-color: var(--dark);
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    
+    html, body { 
+        margin: 0; padding: 0; 
+        background-color: var(--dark); 
         color: #efefef;
         font-family: 'Plus Jakarta Sans', sans-serif;
-        margin: 0;
-        line-height: 1.6;
         overflow-x: hidden;
     }
 
@@ -34,107 +31,124 @@
     .bg-wrapper {
         position: fixed;
         top: 0; left: 0; width: 100%; height: 100%;
-        z-index: -2; background: #000; overflow: hidden;
+        z-index: -2; background: #000;
     }
     .orb {
-        position: absolute; width: 60vw; height: 60vw; border-radius: 50%;
-        filter: blur(100px); opacity: 0.12; pointer-events: none;
+        position: absolute; width: 80vw; height: 80vw; border-radius: 50%;
+        filter: blur(80px); opacity: 0.1; pointer-events: none;
     }
-    .orb-1 { background: var(--gold); top: -10%; left: -10%; }
-    .orb-2 { background: #333; bottom: -10%; right: -10%; }
+    .orb-1 { background: var(--gold); top: -20%; left: -20%; }
+    .orb-2 { background: #333; bottom: -20%; right: -20%; }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+    .container { 
+        max-width: 1100px; 
+        margin: 0 auto; 
+        padding: 0 20px; 
+        position: relative; 
+        z-index: 1; 
+    }
 
     /* --- HERO --- */
     .hero {
-        height: 100vh;
+        height: 90vh;
+        min-height: 500px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding: 0 10px;
     }
     .hero-bg-text {
-        position: absolute; font-size: 28vw; font-weight: 800; color: transparent;
+        position: absolute; font-size: 35vw; font-weight: 800; color: transparent;
         -webkit-text-stroke: 1px rgba(255,255,255,0.02); z-index: -1;
-        letter-spacing: -1vw; user-select: none;
+        letter-spacing: -1vw; user-select: none; top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
     }
     .hero h1 { 
-        font-size: clamp(2.8rem, 10vw, 9rem); 
-        font-weight: 800; text-transform: uppercase; margin: 0; line-height: 0.85; 
-        letter-spacing: -2px;
-        background: linear-gradient(to bottom, #fff, #777);
+        font-size: clamp(2.5rem, 12vw, 8rem); 
+        font-weight: 800; text-transform: uppercase; margin: 0; line-height: 0.9; 
+        letter-spacing: -1px;
+        background: linear-gradient(to bottom, #fff, #888);
         -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .hero-wave { display: flex; align-items: flex-end; gap: 4px; height: 40px; margin-bottom: 20px; }
-    .wave-bar { width: 3px; background: var(--gold); border-radius: 2px; animation: wave-pulse 1.5s ease-in-out infinite; }
-    @keyframes wave-pulse { 0%, 100% { height: 10px; opacity: 0.2; } 50% { height: 40px; opacity: 1; } }
+    .hero-wave { display: flex; align-items: flex-end; gap: 3px; height: 30px; margin-bottom: 15px; }
+    .wave-bar { width: 2px; background: var(--gold); border-radius: 1px; animation: wave-pulse 1.5s ease-in-out infinite; }
+    @keyframes wave-pulse { 0%, 100% { height: 8px; opacity: 0.2; } 50% { height: 30px; opacity: 1; } }
 
-    /* --- GRID --- */
+    /* --- CONTENT GRID --- */
     .grid { 
         display: grid; 
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-        gap: 25px; 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+        gap: 20px; 
     }
 
-    /* --- GLASS CARDS --- */
     .glass-card {
-        background: rgba(255, 255, 255, 0.02);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        background: var(--glass-inner);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
         border: 1px solid var(--glass-border);
-        border-radius: 24px;
-        padding: 30px;
+        border-radius: 20px;
+        padding: 24px;
         transition: var(--transition);
         position: relative;
     }
-    .glass-card:hover { border-color: var(--gold); transform: translateY(-5px); }
 
-    /* --- FOOTER & CONTACT --- */
-    .site-footer { padding: 80px 0 40px; margin-top: 100px; border-top: 1px solid var(--glass-border); }
+    /* --- GLASSMORPHIC FOOTER --- */
+    .glass-footer {
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border: 1px solid var(--glass-border);
+        border-radius: 30px 30px 0 0; /* Rounded top only */
+        padding: 60px 40px 40px;
+        margin-top: 80px;
+        box-shadow: 0 -20px 40px rgba(0,0,0,0.5);
+    }
+
     .contact-grid { 
         display: grid; 
-        grid-template-columns: 1fr 1.2fr; 
-        gap: 60px; 
-    }
-    @media (max-width: 900px) {
-        .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+        gap: 40px; 
     }
 
+    /* --- INPUTS --- */
     .input-field {
-        width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
-        border-radius: 12px; padding: 18px; color: white; font-family: inherit;
-        outline: none; margin-bottom: 15px; transition: 0.3s;
+        width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+        border-radius: 12px; padding: 15px; color: white; font-family: inherit;
+        outline: none; margin-bottom: 12px; font-size: 16px; transition: 0.3s;
     }
-    .input-field:focus { border-color: var(--gold); }
+    .input-field:focus { border-color: var(--gold); background: rgba(255,255,255,0.08); }
 
     .send-btn {
-        background: var(--gold); color: black; width: 100%; padding: 18px; border: none;
+        background: var(--gold); color: black; width: 100%; padding: 16px; border: none;
         border-radius: 12px; font-weight: 800; cursor: pointer; display: flex;
-        justify-content: space-between; align-items: center; transition: 0.4s;
+        justify-content: space-between; align-items: center; transition: 0.3s;
+    }
+    .send-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px var(--gold-glow); }
+
+    .tag { font-size: 8px; border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; text-transform: uppercase; font-weight: 800; margin-right: 5px; display: inline-block; margin-bottom: 5px; }
+    
+    #admin-panel { 
+        display: none; background: #0a0a0a; border: 1px solid var(--gold); 
+        padding: 25px; border-radius: 20px; margin-bottom: 40px;
+    }
+    
+    @media (max-width: 600px) {
+        .glass-footer { padding: 40px 20px 30px; margin-top: 40px; border-radius: 20px 20px 0 0; }
+        .hero { height: 80vh; }
+        section { margin: 40px 0; }
     }
 
-    .tag { font-size: 9px; border: 1px solid var(--gold); color: var(--gold); padding: 3px 10px; border-radius: 50px; text-transform: uppercase; font-weight: 800; margin-right: 8px; }
-    
-    /* --- ADMIN PANEL --- */
-    #admin-panel { 
-        display: none; background: rgba(10,10,10,0.99); backdrop-filter: blur(50px);
-        border: 2px solid var(--gold); padding: 40px; border-radius: 30px; 
-        margin: 40px 0; box-shadow: 0 0 80px rgba(0,0,0,0.8);
-        position: sticky; top: 20px; z-index: 1000;
-    }
-    
     #admin-indicator {
-        position: fixed; top: 20px; right: 20px; background: var(--gold);
-        color: black; padding: 5px 12px; border-radius: 5px; font-weight: 800;
-        font-size: 10px; z-index: 1001; display: none; letter-spacing: 1px;
+        position: fixed; top: 10px; right: 10px; background: var(--gold);
+        color: black; padding: 4px 10px; border-radius: 4px; font-weight: 800;
+        font-size: 9px; z-index: 1001; display: none;
     }
 </style>
 </head>
 <body>
 
-    <div id="admin-indicator">STUDIO SESSION ACTIVE</div>
+    <div id="admin-indicator">STUDIO SESSION</div>
 
     <div class="bg-wrapper">
         <div class="orb orb-1"></div>
@@ -149,77 +163,76 @@
                 <div class="wave-bar" style="animation-delay: 0.3s"></div>
                 <div class="wave-bar" style="animation-delay: 0.2s"></div>
                 <div class="wave-bar" style="animation-delay: 0.4s"></div>
-                <div class="wave-bar" style="animation-delay: 0.5s"></div>
             </div>
             <h1>Voice <span style="font-family:'Playfair Display', serif; color:var(--gold); font-style:italic; -webkit-text-fill-color:var(--gold);">of</span> Zion</h1>
-            <p style="letter-spacing: 4px; color: #888; text-transform: uppercase; font-size: clamp(10px, 2vw, 12px); font-weight: 800; margin-top: 15px;">Capturing the frequency of modern narrative</p>
+            <p style="letter-spacing: 2px; color: #888; text-transform: uppercase; font-size: 10px; font-weight: 800; margin-top: 10px;">The frequency of modern narrative</p>
         </header>
 
         <section id="admin-panel">
-            <h2 style="letter-spacing: 2px; margin: 0 0 25px 0; color:var(--gold)">ARCHIVE MANAGEMENT</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                <input type="text" id="newTitle" class="input-field" placeholder="Reel Title" style="margin:0;">
-                <input type="text" id="newTags" class="input-field" placeholder="Tone Tags (e.g. Gritty, Corporate)" style="margin:0;">
-                <input type="text" id="newUrl" class="input-field" placeholder="Audio or Video Link" style="grid-column: span 2; margin:0;">
-                <button id="publishBtn" onclick="handleAddItem()" class="send-btn" style="grid-column: span 2;">
-                    <span>UPDATE SITE</span>
-                    <i class="fas fa-arrow-up"></i>
-                </button>
+            <h3 style="margin-top:0; color:var(--gold); letter-spacing: 2px;">STUDIO CONSOLE</h3>
+            <div style="display: grid; gap: 10px;">
+                <input type="text" id="newTitle" class="input-field" placeholder="Title">
+                <input type="text" id="newTags" class="input-field" placeholder="Tags">
+                <input type="text" id="newUrl" class="input-field" placeholder="URL">
+                <button id="publishBtn" onclick="handleAddItem()" class="send-btn"><span>PUBLISH</span><i class="fas fa-plus"></i></button>
             </div>
-            <div style="display:flex; justify-content: space-between; margin-top: 25px; border-top: 1px solid #222; padding-top: 20px;">
-                <button onclick="logoutAdmin()" style="color:#ff4444; background:none; border:none; cursor:pointer; font-weight:800; font-size:10px;">EXIT STUDIO</button>
-                <button onclick="toggleAdminView()" style="color:#555; background:none; border:none; cursor:pointer; font-weight:800; font-size:10px;">MINIMIZE</button>
+            <div style="margin-top:15px; display:flex; gap:20px;">
+                <button onclick="logoutAdmin()" style="background:none; border:none; color:red; font-size:10px; cursor:pointer; font-weight: 800;">LOGOUT</button>
+                <button onclick="toggleAdminView()" style="background:none; border:none; color:#555; font-size:10px; cursor:pointer; font-weight: 800;">HIDE</button>
             </div>
         </section>
 
         <main>
-            <div style="display: flex; align-items: center; gap: 15px; margin: 60px 0 30px;">
-                <h2 style="text-transform: uppercase; letter-spacing: 3px; font-size: 1rem; margin: 0;">Vocal Archetypes</h2>
-                <div style="flex-grow: 1; height: 1px; background: var(--glass-border);"></div>
-            </div>
-            <div id="audio-list" class="grid"></div>
+            <section>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                    <h2 style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin: 0; color: #666;">Vocal Archetypes</h2>
+                    <div style="flex-grow: 1; height: 1px; background: var(--glass-border);"></div>
+                </div>
+                <div id="audio-list" class="grid"></div>
+            </section>
 
-            <div style="display: flex; align-items: center; gap: 15px; margin: 80px 0 30px;">
-                <h2 style="text-transform: uppercase; letter-spacing: 3px; font-size: 1rem; margin: 0;">Visual Performances</h2>
-                <div style="flex-grow: 1; height: 1px; background: var(--glass-border);"></div>
-            </div>
-            <div id="video-list" class="grid"></div>
+            <section>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                    <h2 style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin: 0; color: #666;">Visual Performances</h2>
+                    <div style="flex-grow: 1; height: 1px; background: var(--glass-border);"></div>
+                </div>
+                <div id="video-list" class="grid"></div>
+            </section>
         </main>
 
-        <footer class="site-footer">
+        <footer class="glass-footer">
             <div class="contact-grid">
                 <div>
-                    <h2 style="font-size: clamp(2.5rem, 8vw, 3.5rem); line-height: 0.9; margin: 0; font-weight: 800;">Define your <br><span style="color:var(--gold)">Sonic Identity</span></h2>
-                    <div style="font-family: monospace; font-size: 2rem; margin-top: 30px;" id="local-clock">00:00:00</div>
-                    <p style="color: #666; font-size: 11px; margin-top: 15px; max-width: 300px;">Direct transmissions for commercial, narrative, and cinematic collaboration.</p>
+                    <h2 style="font-size: clamp(2rem, 8vw, 3rem); line-height: 1; margin: 0; font-weight: 800;">Define your <br><span style="color:var(--gold)">Sonic Identity</span></h2>
+                    <div style="font-family: monospace; font-size: 1.8rem; margin-top: 25px; color: var(--gold);" id="local-clock">00:00:00</div>
+                    <p style="font-size: 9px; color: #555; letter-spacing: 2px; margin-top: 5px;">ESTABLISHED 2026 // NAIROBI STUDIO</p>
                 </div>
 
                 <div>
                     <form id="contactForm">
-                        <input type="text" class="input-field" placeholder="PARTNER NAME / AGENCY">
-                        <input type="email" class="input-field" placeholder="TRANSMISSION EMAIL">
-                        <textarea class="input-field" rows="4" placeholder="DESCRIBE THE VISION..."></textarea>
-                        <button type="button" class="send-btn"><span>CONTACT US</span><i class="fas fa-paper-plane"></i></button>
+                        <input type="text" class="input-field" placeholder="NAME / AGENCY">
+                        <input type="email" class="input-field" placeholder="EMAIL">
+                        <textarea class="input-field" rows="3" placeholder="PROJECT VISION..."></textarea>
+                        <button type="button" class="send-btn"><span>INITIATE CONTACT</span><i class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
-            <div style="display: flex; justify-content: space-between; margin-top: 60px; border-top: 1px solid var(--glass-border); padding-top: 30px; font-size: 10px; color: #444;">
-                <p>VOICE OF ZION © 2026</p>
-                <div onclick="checkLogin()" style="cursor:pointer; letter-spacing: 2px; color:var(--gold)">STUDIO</div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; font-size: 9px; color: #444; letter-spacing: 1px;">
+                <p>© ZION PERFORMANCE STUDIO</p>
+                <div onclick="checkLogin()" style="cursor:pointer; color: var(--gold); font-weight: 800;">SECURE ACCESS</div>
             </div>
         </footer>
     </div>
 
     <script>
-        // UPDATED PLACEHOLDERS WITH RELEVANT TEXT
         const placeholders = [
             { title: "Cinematic Narrative Reel", tags: "Dark, Gritty, Epic", type: "audio", embed: "https://soundcloud.com/creativelabs/narrative-demo" },
-            { title: "Modern Commercial Demo", tags: "Professional, Warm, Smooth", type: "audio", embed: "https://soundcloud.com/creativelabs/commercial-demo" },
-            { title: "Interactive Media / Games", tags: "Character, High-Energy", type: "audio", embed: "https://soundcloud.com/creativelabs/character-demo" },
-            { title: "Featured Brand Campaign", tags: "Commercial Performance", type: "video", embed: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+            { title: "Modern Commercial Demo", tags: "Professional, Smooth", type: "audio", embed: "https://soundcloud.com/creativelabs/commercial-demo" },
+            { title: "Featured Campaign", tags: "Performance", type: "video", embed: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
         ];
 
-        let portfolio = JSON.parse(localStorage.getItem('zion_v29')) || placeholders;
+        let portfolio = JSON.parse(localStorage.getItem('zion_v31')) || placeholders;
         let isAdminActive = false;
 
         function render() {
@@ -235,36 +248,35 @@
 
             portfolio.forEach((item, index) => {
                 const tags = item.tags.split(',').map(t => `<span class="tag">${t.trim()}</span>`).join('');
-                const delBtn = isAdminActive ? `<button onclick="deleteItem(${index})" style="position:absolute; top:15px; right:15px; background:rgba(255,50,50,0.2); color:#ff5555; border:1px solid #ff5555; padding:5px 10px; border-radius:8px; cursor:pointer; font-weight:800; font-size:9px;">DELETE</button>` : '';
+                const delBtn = isAdminActive ? `<button onclick="deleteItem(${index})" style="position:absolute; top:10px; right:10px; background:rgba(255,0,0,0.1); color:#ff5555; border:1px solid #ff5555; padding:3px 8px; border-radius:5px; cursor:pointer; font-size:9px;">DEL</button>` : '';
 
                 if(item.type === 'audio') {
                     aList.innerHTML += `
                         <div class="glass-card" id="card-${index}">
                             ${delBtn}
                             <div style="display:flex; justify-content:space-between; align-items:center;">
-                                <div><div style="margin-bottom:10px;">${tags}</div><h3 style="margin:0; font-size:1.2rem;">${item.title}</h3></div>
-                                <div style="width:50px; height:50px; background:var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; color:black; cursor:pointer;" onclick="handlePlay(${index})"><i class="fas fa-play" id="icon-${index}"></i></div>
+                                <div style="flex:1; padding-right:10px;"><div>${tags}</div><h3 style="margin:5px 0 0 0; font-size:1.1rem;">${item.title}</h3></div>
+                                <div style="width:45px; height:45px; background:var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; color:black; cursor:pointer;" onclick="handlePlay(${index})"><i class="fas fa-play" id="icon-${index}"></i></div>
                             </div>
-                            <div id="engine-${index}" style="margin-top:20px; height:0; overflow:hidden; transition:0.4s ease;"></div>
+                            <div id="engine-${index}" style="margin-top:15px; height:0; overflow:hidden; transition:0.4s ease;"></div>
                         </div>`;
                 } else {
                     vList.innerHTML += `
                         <div class="glass-card">
                             ${delBtn}
-                            <div style="position:relative; padding-top:56.25%; border-radius:12px; overflow:hidden; margin-bottom:15px;">
+                            <div style="position:relative; padding-top:56.25%; border-radius:12px; overflow:hidden; margin-bottom:15px; background:#111;">
                                 <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="${item.embed}"></iframe>
                             </div>
-                            <div>${tags}</div><h3 style="margin:10px 0 0 0; font-size:1.2rem;">${item.title}</h3>
+                            <div>${tags}</div><h3 style="margin:5px 0 0 0; font-size:1.1rem;">${item.title}</h3>
                         </div>`;
                 }
             });
         }
 
-        // Auth Logic
         function checkLogin() {
             if (isAdminActive) { toggleAdminView(); } 
             else {
-                const pass = prompt("Studio Access Key:");
+                const pass = prompt("Access Key:");
                 if (pass === "zion2026") { isAdminActive = true; render(); }
             }
         }
@@ -275,14 +287,12 @@
             p.style.display = p.style.display === 'none' ? 'block' : 'none';
         }
 
-        // Functional Logic
         function handleAddItem() {
             const btn = document.getElementById('publishBtn');
             const title = document.getElementById('newTitle').value;
             const url = document.getElementById('newUrl').value;
             const tags = document.getElementById('newTags').value;
-
-            if(!title || !url) { alert("Please enter Title and Link."); return; }
+            if(!title || !url) return;
 
             let type = 'audio'; let embed = url;
             if (url.includes('youtube.com') || url.includes('youtu.be')) {
@@ -290,59 +300,28 @@
                 let id = url.includes('v=') ? url.split('v=')[1].split('&')[0] : url.split('/').pop();
                 embed = `https://www.youtube.com/embed/${id}`;
             }
-            
             portfolio.unshift({ title, tags, type, embed });
-            localStorage.setItem('zion_v29', JSON.stringify(portfolio));
-
+            localStorage.setItem('zion_v31', JSON.stringify(portfolio));
             btn.style.background = 'var(--success)';
-            btn.innerHTML = '<span>SUCCESSFULLY ARCHIVED</span><i class="fas fa-check"></i>';
-            
-            setTimeout(() => {
-                btn.style.background = 'var(--gold)';
-                btn.innerHTML = '<span>UPDATE PORTFOLIO</span><i class="fas fa-arrow-up"></i>';
-                document.getElementById('newTitle').value = '';
-                document.getElementById('newUrl').value = '';
-                document.getElementById('newTags').value = '';
-                render();
-            }, 1200);
+            setTimeout(() => { btn.style.background = 'var(--gold)'; render(); }, 800);
         }
 
-        function deleteItem(idx) {
-            if(confirm("Permanently delete this project?")) {
-                portfolio.splice(idx,1);
-                localStorage.setItem('zion_v29', JSON.stringify(portfolio));
-                render();
-            }
-        }
+        function deleteItem(idx) { if(confirm("Delete?")) { portfolio.splice(idx,1); localStorage.setItem('zion_v31', JSON.stringify(portfolio)); render(); } }
 
         function handlePlay(index) {
             const engine = document.getElementById(`engine-${index}`);
             const icon = document.getElementById(`icon-${index}`);
             const card = document.getElementById(`card-${index}`);
             const isPlaying = card.classList.contains('is-playing');
-
             document.querySelectorAll(".glass-card").forEach(c => c.classList.remove('is-playing'));
             document.querySelectorAll("[id^='engine-']").forEach(e => { e.style.height = '0px'; e.innerHTML = ''; });
             document.querySelectorAll("[id^='icon-']").forEach(i => i.className = 'fas fa-play');
-
             if(!isPlaying) {
-                card.classList.add('is-playing');
-                icon.className = 'fas fa-pause';
+                card.classList.add('is-playing'); icon.className = 'fas fa-pause';
                 engine.style.height = '120px';
                 engine.innerHTML = `<iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=${encodeURIComponent(portfolio[index].embed)}&color=%23d4af37&auto_play=true"></iframe>`;
             }
         }
-
-        // Parallax Effect
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth) * 20;
-            const y = (e.clientY / window.innerHeight) * 20;
-            document.querySelectorAll('.orb').forEach((orb, i) => {
-                orb.style.transform = `translate(${x * (i+1)}px, ${y * (i+1)}px)`;
-            });
-            const h = document.getElementById('heroBg');
-            h.style.transform = `translate(${(window.innerWidth/2 - e.pageX)/40}px, ${(window.innerHeight/2 - e.pageY)/40}px)`;
-        });
 
         setInterval(() => { document.getElementById('local-clock').textContent = new Date().toLocaleTimeString('en-US', { hour12: false }); }, 1000);
         window.onload = render;
